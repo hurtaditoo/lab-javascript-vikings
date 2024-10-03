@@ -63,32 +63,53 @@ class War {
     }
 
     vikingAttack() {
-       let indexRandomSaxonAttacked = Math.floor(Math.random() * this.vikingArmy.length);
-       let indexrandomVikingAttacking = Math.floor(Math.random() * this.saxonArmy.length); 
+        let indexRandomSaxonAttacked = Math.floor(Math.random() * this.vikingArmy.length);
+        let indexRandomVikingAttacking = Math.floor(Math.random() * this.saxonArmy.length); 
 
-       let randomSaxonAttacked = this.saxonArmy[indexRandomSaxonAttacked];
-       let randomVikingAttacking = this.vikingArmy[indexrandomVikingAttacking];
+        let randomSaxonAttacked = this.saxonArmy[indexRandomSaxonAttacked];
+        let randomVikingAttacking = this.vikingArmy[indexRandomVikingAttacking];
 
-       let damageInsuflated = randomSaxonAttacked.receiveDamage(randomVikingAttacking.strength);
+        let damageInsuflated = randomSaxonAttacked.receiveDamage(randomVikingAttacking.strength);
        
-       if (randomSaxonAttacked.health <= 0) {
-        this.saxonArmy.splice(indexRandomSaxonAttacked, 1);
-       }
+        if (randomSaxonAttacked.health <= 0) {
+            this.saxonArmy.splice(indexRandomSaxonAttacked, 1);
+        }
 
-       return damageInsuflated;
+        return damageInsuflated;
     }
 
     saxonAttack() {
         let indexRandomSaxonAttacking = Math.floor(Math.random() * this.saxonArmy.length);
-        let indexrandomVikingAttacked = Math.floor(Math.random() * this.vikingArmy.length); 
+        let indexRandomVikingAttacked = Math.floor(Math.random() * this.vikingArmy.length); 
  
-        let randomVikingAttacked = this.vikingArmy[indexrandomVikingAttacked];
+        let randomVikingAttacked = this.vikingArmy[indexRandomVikingAttacked];
         let randomSaxonAttacking = this.saxonArmy[indexRandomSaxonAttacking];
  
         let damageInsuflated = randomVikingAttacked.receiveDamage(randomSaxonAttacking.strength);
         
         if (randomVikingAttacked.health <= 0) {
-         this.vikingArmy.splice(indexrandomVikingAttacked, 1);
+            this.vikingArmy.splice(indexRandomVikingAttacked, 1);
+        }
+ 
+        return damageInsuflated;
+    }
+
+    warAttack(WarFrontAttacking, WarFrontAttacked) {     
+        let [attacking, attacked] =
+            (WarFrontAttacking.toLowerCase() === 'vikings' && WarFrontAttacked.toLowerCase() === 'saxons') ? [this.vikingArmy, this.saxonArmy] :
+            (WarFrontAttacking.toLowerCase() === 'saxons' && WarFrontAttacked.toLowerCase() === 'vikings') ? [this.saxonArmy, this.vikingArmy] :
+            (() => { throw new Error("Invalid armies."); })();
+
+        let indexRandomAttacking = Math.floor(Math.random() * attacking.length);
+        let indexRandomAttacked = Math.floor(Math.random() * attacked.length); 
+ 
+        let randomAttacked = this.attacked[indexRandomAttacked];
+        let randomAttacking = this.attacking[indexRandomAttacking];
+ 
+        let damageInsuflated = randomAttacked.receiveDamage(randomAttacking.strength);
+        
+        if (randomAttacked.health <= 0) {
+            attacked.splice(indexRandomAttacked, 1);
         }
  
         return damageInsuflated;
