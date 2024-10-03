@@ -94,7 +94,7 @@ class War {
         return damageInsuflated;
     }
 
-    warAttack(WarFrontAttacking, WarFrontAttacked) {     
+    warAttack(WarFrontAttacking, WarFrontAttacked) {     // Avoiding Repetitive Code
         let [attacking, attacked] =
             (WarFrontAttacking.toLowerCase() === 'vikings' && WarFrontAttacked.toLowerCase() === 'saxons') ? [this.vikingArmy, this.saxonArmy] :
             (WarFrontAttacking.toLowerCase() === 'saxons' && WarFrontAttacked.toLowerCase() === 'vikings') ? [this.saxonArmy, this.vikingArmy] :
