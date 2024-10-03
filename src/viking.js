@@ -48,4 +48,53 @@ class Saxon extends Soldier {
 }
 
 // War
-class War {}
+class War {
+    constructor() {
+        this.vikingArmy = [];
+        this.saxonArmy = [];
+    }
+
+    addViking(viking) {
+        this.vikingArmy.push(viking);
+    }
+
+    addSaxon(saxon) {
+        this.saxonArmy.push(saxon);
+    }
+
+    vikingAttack() {
+       let indexRandomSaxonAttacked = Math.floor(Math.random() * this.vikingArmy.length);
+       let indexrandomVikingAttacking = Math.floor(Math.random() * this.saxonArmy.length); 
+
+       let randomSaxonAttacked = this.saxonArmy[indexRandomSaxonAttacked];
+       let randomVikingAttacking = this.vikingArmy[indexrandomVikingAttacking];
+
+       let damageInsuflated = randomSaxonAttacked.receiveDamage(randomVikingAttacking.strength);
+       
+       if (randomSaxonAttacked.health <= 0) {
+        this.saxonArmy.splice(indexRandomSaxonAttacked, 1);
+       }
+
+       return damageInsuflated;
+    }
+
+    saxonAttack() {
+        let indexRandomSaxonAttacking = Math.floor(Math.random() * this.saxonArmy.length);
+        let indexrandomVikingAttacked = Math.floor(Math.random() * this.vikingArmy.length); 
+ 
+        let randomVikingAttacked = this.vikingArmy[indexrandomVikingAttacked];
+        let randomSaxonAttacking = this.saxonArmy[indexRandomSaxonAttacking];
+ 
+        let damageInsuflated = randomVikingAttacked.receiveDamage(randomSaxonAttacking.strength);
+        
+        if (randomVikingAttacked.health <= 0) {
+         this.vikingArmy.splice(indexrandomVikingAttacked, 1);
+        }
+ 
+        return damageInsuflated;
+    }
+
+    showStatus() {
+
+    }
+}
