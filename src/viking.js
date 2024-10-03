@@ -103,8 +103,8 @@ class War {
         let indexRandomAttacking = Math.floor(Math.random() * attacking.length);
         let indexRandomAttacked = Math.floor(Math.random() * attacked.length); 
  
-        let randomAttacked = this.attacked[indexRandomAttacked];
-        let randomAttacking = this.attacking[indexRandomAttacking];
+        let randomAttacked = attacked[indexRandomAttacked];
+        let randomAttacking = attacking[indexRandomAttacking];
  
         let damageInsuflated = randomAttacked.receiveDamage(randomAttacking.strength);
         
